@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{indentfirst}
+\usepackage{hyperref}
+% \usepackage{lipsum}
+\usepackage{float}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+% \title{To what extent can Fourier Analysis be used to solve Ordinary Differential Equations and Partial Differential Equations?}
+% \author{Saptak Das}
+% \date{June 2023}
+
+\begin{document}
+\include{title}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\label{section:introduction}
+This year I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates.
+
+\[ \frac{dS}{dt} = -\frac{\beta S I}{N} + \mu R \]
+\[ \frac{dE}{dt} = \frac{\beta S I}{N} - \phi E \]
+\[ \frac{dI}{dt} = \phi E - \zeta I - \gamma I - \alpha I \]
+\[ \frac{dQ}{dt} = \zeta I - \kappa Q - \epsilon Q \]
+\[ \frac{dR}{dt} = \gamma I + \kappa Q - \mu R \]
+\[ \frac{dD}{dt} = \alpha I + \epsilon Q \]
+
+\noindent
+where:
+\begin{itemize}
+    \item $N$ is the total population.
+    \item $\beta$ is the contact rate (1/days).
+    \item $\phi$ is the incubation rate (1/days).
+    \item $\zeta$ is the quarantine rate (1/days).
+    \item $\gamma$ is the recovery rate (non-quarantine) (1/days).
+    \item $\kappa$ is the recovery rate (quarantine) (1/days).
+    \item $\mu$ is the immunity wearoff rate (1/days).
+    \item $\alpha$ is the case fatality rate (non-quarantine) (1/days).
+    \item $\epsilon$ is the case fatality rate (quarantine) (1/days).
+\end{itemize}
+
+% \lipsum[3]
+
+\input{background}
+
+\end{document}

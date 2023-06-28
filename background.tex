@@ -1,0 +1,71 @@
+\section{Background}
+\label{section:background}
+\subsection{Differential Equations}
+\subsubsection{Why are Differential Equations important?}
+Differential Equations are extremely powerful in their ability to model various systems in applied mathematics, physics, and engineering. Calculus is the mathematics of change. Hence, differential equations, which relate the derivatives or integrals of a function to the function itself, can very elegantly summarize the behavior of otherwise complex, dynamic systems.
+
+For example, the Lotka-Volterra equations describe the dynamics of populations of predators and prey. These equations are described below.
+
+\[\frac{dx}{dt} = \alpha x - \beta x y\]
+\[\frac{dy}{dt} = \delta x y - \gamma y\]
+
+\noindent
+where:
+\begin{itemize}
+    \item $x$ is the population density of the prey.
+    \item $y$ is the population density of the predator.
+    \item $\alpha$ is the exponential growth rate of the prey.
+    \item $\gamma$ is the exponential decay rate of the predators.
+    \item $\beta$ is the effect of the predators on the prey growth rate.
+    \item $\delta$ is the effect of the presence of prey on the predator growth rate.
+\end{itemize}
+
+This system is a set of first-order, nonlinear ODEs. This is further explained in Section \ref{subsubsection:properties_differential} \nameref{subsubsection:properties_differential}.
+
+\subsubsection{Properties of Differential Equations}
+\label{subsubsection:properties_differential}
+\begin{definition}
+    The order of a system of differential equations is defined as the highest-order derivative the system contains. Since the highest order derivative in the Lotka-Volterra equations is $\frac{d}{dt}$ (no $\frac{d^2}{{dt}^2}$, the equations are first-order.
+\end{definition}
+
+\begin{definition}
+    A system of differential equations is said to be linear if and only if the equations follow the form:
+    \[ a_0 y + a_1 y' + a_2 y'' \dots + a_n y^{(n)} = b(x) \]
+    \noindent
+    where $a_0, a_1, a_2, ..., a_n$ are any differentiable functions (do not need to be linear).
+\end{definition}
+
+\subsubsection{Solution to Differential Equations}
+Note that the solution to a differential equation is not one function, but rather a set of functions that all satisfy the differential equation. Some initial conditions must be given to reduce the solution to a single function. For example, for the Lotka-Volterra equations, the phase space shown in Figure \ref{fig:lotka_volterra_phase} plots the various function solutions given various different initial conditions. The solution for a specific initial condition over time is plotted in Figure \ref{fig:lotka_volterra_init}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=75mm,height=\textheight,keepaspectratio]{images/Predator_prey_dynamics.png}
+    \caption{Solution to the Lotka-Volterra Equations given different predator initial conditions. The predator solution is shifted $\frac{\pi}{2}$ radians right of the prey solution.}
+    \label{fig:lotka_volterra_phase}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=75mm,height=\textheight,keepaspectratio]{images/Lotka_Volterra_dynamics.png}
+    \caption{Solution to the Lotka-Volterra Equations given some initial conditions. The predator solution is shifted $\frac{\pi}{2}$ radians right of the prey solution.}
+    \label{fig:lotka_volterra_init}
+\end{figure}
+
+\subsubsection{ODE vs PDE}
+% \lipsum[2]
+
+\subsection{Fourier Analysis}
+\subsubsection{What is Fourier Analysis?}
+Fourier Analysis is a field of mathematics that studies how complex function waveforms can be decomposed into a series of sinusoidal functions, whose frequencies form a harmonic series. In other words, the Fourier Transform (FT), the cornerstone of Fourier Analysis, turns a signal in time space into a signal in frequency space.
+
+\subsubsection{Fourier and Inverse Fourier Transforms}
+\begin{definition}
+    For a continuous function $f(x)$, the continuous Fourier Transform $\mathcal{F}\{ f(x) \}$ (CFT) is defined as below. The transform returns the frequency space function $\hat{f}(\omega)$.
+    \[ \hat{f}(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i 2\pi \omega x} \,dx \]
+\end{definition}
+
+\begin{definition}
+    In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ \hat{f}(\omega) \}$ (IFFT) can be applied as defined below.
+    \[ f(x) = \mathcal{F}^{-1}\{ \hat{f}(\omega) \} = \int_{-\infty}^{\infty} \hat{f}(\omega) \, e^{i 2\pi \omega x} \,d \omega \]
+\end{definition}

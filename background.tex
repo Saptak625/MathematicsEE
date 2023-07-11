@@ -65,7 +65,78 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
     \[ \hat{f}(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i 2\pi \omega x} \,dx \]
 \end{definition}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{definition}
     In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ \hat{f}(\omega) \}$ (IFFT) can be applied as defined below.
     \[ f(x) = \mathcal{F}^{-1}\{ \hat{f}(\omega) \} = \int_{-\infty}^{\infty} \hat{f}(\omega) \, e^{i 2\pi \omega x} \,d \omega \]
 \end{definition}
+
+\subsubsection{Fourier Series}
+Let \(f(x)\) be defined as the following periodic, yet discontinuous square waveform signal (Heaviside Step Function):
+
+\begin{equation}
+f(x)=
+    \begin{cases}
+        1 & \text{if } nT < x < \frac{T(2n+1)}{2} , n \in \mathbb{Z}\\
+        0 & \text{if } x = \frac{nT}{2} , n \in \mathbb{Z}\\
+        -1 & \text{if } \frac{T(2n+1)}{2} < x < T(n+1) , n \in \mathbb{Z}
+    \end{cases}
+\end{equation}
+
+In order to obtain the Fourier Series for \(f(x)\), the Fourier Transform of \(f(x)\) must be taken.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=100mm,height=\textheight,keepaspectratio]{images/step_function_fourier_series.png}
+    \caption{On the axis to the right, the Fourier Transform of \(f(x)\) can be seen. If an infinite summation of all the frequencies with their corresponding amplitudes was performed as defined by the Fourier Transform, the solution would be exactly equal to \(f(x)\).}
+    \label{fig:decomposed_step_function}
+\end{figure}
+
+Therefore, f(x) can be defined by the infinite summation of sine functions through its Fourier Series as follows: 
+\[f(x)=\frac{4}{\pi}\sum_{n=1,3,5,...}^{\infty} \frac{1}{n} \sin \left( \frac{2 \pi n x}{T}
+ \right) \]
+
+\subsubsection{Properties of the Fourier Transform}
+The Fourier Transform, which is a coordinate transform, is important and useful because many mathematical operations in Fourier space are simplified compared to the original space. Below are some of the important properties of the Fourier Transform that will be useful in solving differential equations using Fourier Analysis.
+\begin{lemma}
+    The Fourier Transform is linear. This means that the transform of a linear combination of functions is equal to the linear combination of the transforms of the individual functions.
+    \[ \mathcal{F}\{ a f(x) + b g(x) \} = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
+\end{lemma}
+\begin{proof}
+    \[ \mathcal{F}\{ a f(x) + b g(x) \} = \int_{-\infty}^{\infty} (a f(x) + b g(x)) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ = \int_{-\infty}^{\infty} a f(x) \, e^{-i 2\pi \omega x} \,dx + \int_{-\infty}^{\infty} b g(x) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i 2\pi \omega x} \,dx + b \int_{-\infty}^{\infty} g(x) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lemma}
+    The Fourier Transform can be shifted easily along the axis of the transform. When a function \(f(x)\) along the x-axis by \(x_0\) units, the transform of the shifted function is equal to the transform of the original function multiplied by $e^{-i 2\pi \omega x_0}$.
+    \[ \mathcal{F}\{ f(x - x_0) \} = e^{-i 2\pi \omega x_0} \hat{f}(\omega) \]
+\end{lemma}
+
+\begin{proof}
+    \[ \mathcal{F}\{ f(x - x_0) \} = \int_{-\infty}^{\infty} f(x - x_0) \, e^{-i 2\pi \omega x} \,dx \]
+    Let \(u = x - x_0\). Thus, \(x = u + x_0\).
+    \[ = \int_{-\infty}^{\infty} f(u) \, e^{-i 2\pi \omega (u + x_0)} \,dx \]
+    \[ = e^{-i 2\pi \omega x_0} \int_{-\infty}^{\infty} f(u) \, e^{-i 2\pi \omega u} \,dx \]
+    \[ = e^{-i 2\pi \omega x_0} \hat{f}(\omega) \]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+    The Fourier Transform of a function's derivative is equal to the transform of the original function multiplied by $i 2\pi \omega$.
+    \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = i 2\pi \omega \hat{f}(\omega) \]
+\end{lemma}
+
+\begin{proof}
+    \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = \int_{-\infty}^{\infty} \frac{d f(x)}{dx}  \, e^{-i 2\pi \omega x} \,dx \]
+    Using integration by parts, let \(u = f(x)\) and \(dv = e^{-i 2\pi \omega x} dx\).
+    \[ = \left[ f(x) e^{-i 2\pi \omega x} \right]_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f(x) \left( \frac{d}{dx} e^{-i 2\pi \omega x} \right) \,dx \]
+    Since \(f(x)\) must be continuous and integrable to be differentiable and take the Fourier Transform on \(\mathbb{R}\), \(\lim_{x \to -\infty}=\lim_{x \to \infty}=0\) must be true. Thus, the first term is equal to zero. 
+    \[ = - \int_{-\infty}^{\infty} f(x) \left( -i 2\pi \omega e^{-i 2\pi \omega x} \right) \,dx \]
+    \[ = i 2\pi \omega \int_{-\infty}^{\infty} f(x) e^{-i 2\pi \omega x} \,dx \]
+    \[ = i 2\pi \omega \hat{f}(\omega) \]
+\end{proof}

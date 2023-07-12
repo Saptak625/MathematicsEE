@@ -100,22 +100,38 @@ Therefore, f(x) can be defined by the infinite summation of sine functions throu
 \subsubsection{Properties of the Fourier Transform}
 The Fourier Transform, which is a coordinate transform, is important and useful because many mathematical operations in Fourier space are simplified compared to the original space. Below are some of the important properties of the Fourier Transform that will be useful in solving differential equations using Fourier Analysis.
 \begin{lemma}
-    The Fourier Transform is linear. This means that the transform of a linear combination of functions is equal to the linear combination of the transforms of the individual functions.
-    \[ \mathcal{F}\{ a f(x) + b g(x) \} = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
+    \label{fourier_scaling}
+    If a function \(f(x)\) is scaled by a constant $a$, the Fourier Transform will also be scaled by $a$.
+    \[ \mathcal{F}\{ a f(x) \} = a \mathcal{F}\{ f(x) \} \]
 \end{lemma}
+
+\begin{proof}
+    \[ \mathcal{F}\{ a f(x) \} = \int_{-\infty}^{\infty} a f(x) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i 2\pi \omega x} \,dx = a \mathcal{F}\{ f(x) \} \]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+    \label{fourier_linearity}
+    The Fourier Transform is a linear transformation. This means that the transform of a linear combination of functions is equal to the linear combination of the transforms of the individual functions.
+    \[ \mathcal{F}\{ a f(x) + b g(x) \} = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
+\end{theorem}
 \begin{proof}
     \[ \mathcal{F}\{ a f(x) + b g(x) \} = \int_{-\infty}^{\infty} (a f(x) + b g(x)) \, e^{-i 2\pi \omega x} \,dx \]
     \[ = \int_{-\infty}^{\infty} a f(x) \, e^{-i 2\pi \omega x} \,dx + \int_{-\infty}^{\infty} b g(x) \, e^{-i 2\pi \omega x} \,dx \]
+    Using \cref{fourier_scaling}
     \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i 2\pi \omega x} \,dx + b \int_{-\infty}^{\infty} g(x) \, e^{-i 2\pi \omega x} \,dx \]
     \[ = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{lemma}
+\begin{theorem}
+    \label{fourier_shift}
     The Fourier Transform can be shifted easily along the axis of the transform. When a function \(f(x)\) along the x-axis by \(x_0\) units, the transform of the shifted function is equal to the transform of the original function multiplied by $e^{-i 2\pi \omega x_0}$.
     \[ \mathcal{F}\{ f(x - x_0) \} = e^{-i 2\pi \omega x_0} \hat{f}(\omega) \]
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
     \[ \mathcal{F}\{ f(x - x_0) \} = \int_{-\infty}^{\infty} f(x - x_0) \, e^{-i 2\pi \omega x} \,dx \]
@@ -126,10 +142,11 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{theorem}
+    \label{fourier_derivative}
     The Fourier Transform of a function's derivative is equal to the transform of the original function multiplied by $i 2\pi \omega$.
     \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = i 2\pi \omega \hat{f}(\omega) \]
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
     \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = \int_{-\infty}^{\infty} \frac{d f(x)}{dx}  \, e^{-i 2\pi \omega x} \,dx \]

@@ -1,0 +1,48 @@
+\subsection{Bessel's Equation}
+
+\subsubsection{Brief Derivation}
+\begin{equation}
+    x^2 \frac{d^2 y}{dx^2} + x \frac{dy}{dx} + (x^2 - \alpha^2)y = 0
+\end{equation}
+
+% TODO: Rephrase in own words.
+To simplify Bessel's equation using the Fourier-Bessel transform, we can introduce a new variable, \(\rho\), defined as:
+
+\[ x = \alpha \rho \]
+
+where \(\alpha\) is a constant.
+
+Now, let's take the Fourier-Bessel transform of Bessel's equation. The Fourier-Bessel transform of a function \(f(x)\) is defined as:
+
+\[ F_\alpha(\rho) = \int_{0}^{\infty} f(x) J_n(\alpha\rho) x dx \]
+
+where \(J_n(\alpha\rho)\) is the Bessel function of the first kind of order n.
+
+Applying the Fourier-Bessel transform to Bessel's equation, we get:
+
+\[ \frac{\alpha^2 \rho^2 d^2F_\alpha(\rho)}{d\rho^2} + \frac{\alpha\rho dF_\alpha(\rho)}{d\rho} + (\alpha^2 \rho^2 - n^2) F_\alpha(\rho) = 0 \]
+
+This transformed equation simplifies to:
+
+\[ \frac{\rho^2 d^2F_\alpha(\/rho)}{d\rho^2} + \frac{\rho dF_\alpha(\rho)}{d\rho} + (\frac{\rho^2 - n^2}{\alpha^2}) F_\alpha(\rho) = 0 \]
+
+Notice that this transformed equation no longer contains the derivative with respect to x.
+
+The solution to this transformed equation is given by the Bessel differential equation:
+
+\[ \frac{\rho^2 d^2F_\alpha(\rho)}{d\rho^2} + \frac{\rho dF_\alpha(\rho)}{d\rho} + (\frac{\rho^2 - n^2}{\alpha^2}) F_\alpha(\rho) = 0 \]
+
+The general solution to the Bessel differential equation is expressed in terms of Bessel functions:
+
+\[ F_\alpha(\rho) = c_1 J_n(\alpha\rho) + c_2 Y_n(\alpha\rho) \]
+
+where \(J_n(\alpha\rho)\) is the Bessel function of the first kind and \(Y_n(\alpha\rho)\) is the Bessel function of the second kind. c1 and c2 are constants determined by the boundary conditions of the problem.
+
+By taking the inverse Fourier-Bessel transform of \(F_\alpha(\rho)\), we can obtain the solution \(y(x)\) to Bessel's equation in terms of Bessel functions.
+
+\subsubsection{Application of the Fourier Transform}
+
+\subsubsection{Numerical Solution to Bessel's Equation}
+
+% \subsubsection{Analytical Solution to Wave Equation} 
+% This is a maybe section. Possibly replace this section with a section on the applicability of the Fourier Transform to reduce PDEs to ODEs...?

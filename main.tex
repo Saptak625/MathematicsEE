@@ -12,7 +12,12 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{theorem}{Theorem}[section]
+
+\crefname{section}{Section}{Sections}
+\crefname{figure}{Figure}{Figures}
+\crefname{definition}{Definition}{Definitions}
 \crefname{equation}{Equation}{Equations}
+\creflabelformat{equation}{#2#1#3}
 \crefname{lemma}{Lemma}{Lemmas}
 \crefname{theorem}{Theorem}{Theorems}
 
@@ -52,6 +57,9 @@ where:
     \item $\alpha$ is the case fatality rate (non-quarantine) (1/days).
     \item $\epsilon$ is the case fatality rate (quarantine) (1/days).
 \end{itemize}
+
+% TODO: Explain why you chose this topic. Why is this topic important and interesting to study?
+% TODO: Clearly define the focus of this paper and make sure to maintain that focus throughout the paper...
 
 % \lipsum[3]
 

@@ -6,8 +6,10 @@ Differential Equations are extremely powerful in their ability to model various 
 
 For example, the Lotka-Volterra equations describe the dynamics of populations of predators and prey. These equations are described below.
 
-\[\frac{dx}{dt} = \alpha x - \beta x y\]
-\[\frac{dy}{dt} = \delta x y - \gamma y\]
+\begin{align}
+    \frac{dx}{dt} &= \alpha x - \beta x y \label{eq:lotka_volterra_1} \\
+    \frac{dy}{dt} &= \delta x y - \gamma y \label{eq:lotka_volterra_2}
+\end{align}
 
 \noindent
 where:
@@ -20,12 +22,12 @@ where:
     \item $\delta$ is the effect of the presence of prey on the predator growth rate.
 \end{itemize}
 
-This system is a set of first-order, nonlinear ODEs. This is further explained in Section \ref{subsubsection:properties_differential} \nameref{subsubsection:properties_differential}.
+\cref{eq:lotka_volterra_1,eq:lotka_volterra_2} are a set of first-order, nonlinear ODEs. This is further explained in Section \ref{subsubsection:properties_differential} \nameref{subsubsection:properties_differential}.
 
 \subsubsection{Properties of Differential Equations}
 \label{subsubsection:properties_differential}
 \begin{definition}
-    The order of a system of differential equations is defined as the highest-order derivative the system contains. Since the highest order derivative in the Lotka-Volterra equations is $\frac{d}{dt}$ (no $\frac{d^2}{{dt}^2}$, the equations are first-order.
+    The order of a system of differential equations is defined as the highest-order derivative the system contains. Since the highest order derivative in the Lotka-Volterra \cref{eq:lotka_volterra_1,eq:lotka_volterra_2} is $\frac{d}{dt}$ (no $\frac{d^2}{{dt}^2}$), the equations are first-order.
 \end{definition}
 
 \begin{definition}
@@ -36,7 +38,7 @@ This system is a set of first-order, nonlinear ODEs. This is further explained i
 \end{definition}
 
 \subsubsection{Solution to Differential Equations}
-Note that the solution to a differential equation is not one function, but rather a set of functions that all satisfy the differential equation. Some initial conditions must be given to reduce the solution to a single function. For example, for the Lotka-Volterra equations, the phase space shown in Figure \ref{fig:lotka_volterra_phase} plots the various function solutions given various different initial conditions. The solution for a specific initial condition over time is plotted in Figure \ref{fig:lotka_volterra_init}
+Note that the solution to a differential equation is not one function, but rather a set of functions that all satisfy the differential equation. Some initial conditions must be given to reduce the solution to a single function. For example, for the Lotka-Volterra equations, the phase space shown in Figure \ref{fig:lotka_volterra_phase} plots the various function solutions given various different initial conditions. The solution for a specific initial condition over time is plotted in Figure \ref{fig:lotka_volterra_init}.
 
 \begin{figure}[H]
     \centering
@@ -62,14 +64,18 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
 \subsubsection{Fourier and Inverse Fourier Transforms}
 \begin{definition}
     For a continuous function $f(x)$, the continuous Fourier Transform $\mathcal{F}\{ f(x) \}$ (CFT) is defined as below. The transform returns the frequency space function $\hat{f}(\omega)$.
-    \[ \hat{f}(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i 2\pi \omega x} \,dx \]
+    \begin{equation}
+        \hat{f}(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i \omega x} \,dx
+    \end{equation}
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}
     In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ \hat{f}(\omega) \}$ (IFFT) can be applied as defined below.
-    \[ f(x) = \mathcal{F}^{-1}\{ \hat{f}(\omega) \} = \int_{-\infty}^{\infty} \hat{f}(\omega) \, e^{i 2\pi \omega x} \,d \omega \]
+    \begin{equation} \label{eq:heaviside_step}
+        f(x) = \mathcal{F}^{-1}\{ \hat{f}(\omega) \} = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(\omega) \, e^{i \omega x} \,d \omega
+    \end{equation}
 \end{definition}
 
 \subsubsection{Fourier Series}
@@ -93,7 +99,7 @@ In order to obtain the Fourier Series for \(f(x)\), the Fourier Transform of \(f
     \label{fig:decomposed_step_function}
 \end{figure}
 
-Therefore, f(x) can be defined by the infinite summation of sine functions through its Fourier Series as follows: 
+Therefore, f(x) (\cref{eq:heaviside_step}) can be defined by the infinite summation of sine functions through its Fourier Series as follows: 
 \[f(x)=\frac{4}{\pi}\sum_{n=1,3,5,...}^{\infty} \frac{1}{n} \sin \left( \frac{2 \pi n x}{T}
  \right) \]
 
@@ -102,12 +108,14 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
 \begin{lemma}
     \label{fourier_scaling}
     If a function \(f(x)\) is scaled by a constant $a$, the Fourier Transform will also be scaled by $a$.
-    \[ \mathcal{F}\{ a f(x) \} = a \mathcal{F}\{ f(x) \} \]
+    \begin{equation}
+        \mathcal{F}\{ a f(x) \} = a \mathcal{F}\{ f(x) \}
+    \end{equation}
 \end{lemma}
 
 \begin{proof}
-    \[ \mathcal{F}\{ a f(x) \} = \int_{-\infty}^{\infty} a f(x) \, e^{-i 2\pi \omega x} \,dx \]
-    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i 2\pi \omega x} \,dx = a \mathcal{F}\{ f(x) \} \]
+    \[ \mathcal{F}\{ a f(x) \} = \int_{-\infty}^{\infty} a f(x) \, e^{-i \omega x} \,dx \]
+    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i \omega x} \,dx = a \mathcal{F}\{ f(x) \} \]
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,13 +123,15 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
 \begin{theorem}
     \label{fourier_linearity}
     The Fourier Transform is a linear transformation. This means that the transform of a linear combination of functions is equal to the linear combination of the transforms of the individual functions.
-    \[ \mathcal{F}\{ a f(x) + b g(x) \} = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
+    \begin{equation}
+        \mathcal{F}\{ a f(x) + b g(x) \} = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \}
+    \end{equation}
 \end{theorem}
 \begin{proof}
-    \[ \mathcal{F}\{ a f(x) + b g(x) \} = \int_{-\infty}^{\infty} (a f(x) + b g(x)) \, e^{-i 2\pi \omega x} \,dx \]
-    \[ = \int_{-\infty}^{\infty} a f(x) \, e^{-i 2\pi \omega x} \,dx + \int_{-\infty}^{\infty} b g(x) \, e^{-i 2\pi \omega x} \,dx \]
-    Using \cref{fourier_scaling}
-    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i 2\pi \omega x} \,dx + b \int_{-\infty}^{\infty} g(x) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ \mathcal{F}\{ a f(x) + b g(x) \} = \int_{-\infty}^{\infty} (a f(x) + b g(x)) \, e^{-i \omega x} \,dx \]
+    \[ = \int_{-\infty}^{\infty} a f(x) \, e^{-i \omega x} \,dx + \int_{-\infty}^{\infty} b g(x) \, e^{-i \omega x} \,dx \]
+    Using \cref{fourier_scaling},
+    \[ = a \int_{-\infty}^{\infty} f(x) \, e^{-i \omega x} \,dx + b \int_{-\infty}^{\infty} g(x) \, e^{-i \omega x} \,dx \]
     \[ = a \mathcal{F}\{ f(x) \} + b \mathcal{F}\{ g(x) \} \]
 \end{proof}
 
@@ -129,31 +139,35 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
 
 \begin{theorem}
     \label{fourier_shift}
-    The Fourier Transform can be shifted easily along the axis of the transform. When a function \(f(x)\) along the x-axis by \(x_0\) units, the transform of the shifted function is equal to the transform of the original function multiplied by $e^{-i 2\pi \omega x_0}$.
-    \[ \mathcal{F}\{ f(x - x_0) \} = e^{-i 2\pi \omega x_0} \hat{f}(\omega) \]
+    The Fourier Transform can be shifted easily along the axis of the transform. When a function \(f(x)\) along the x-axis by \(x_0\) units, the transform of the shifted function is equal to the transform of the original function multiplied by $e^{-i \omega x_0}$.
+    \begin{equation}
+        \mathcal{F}\{ f(x - x_0) \} = e^{-i \omega x_0} \hat{f}(\omega)
+    \end{equation}
 \end{theorem}
 
 \begin{proof}
-    \[ \mathcal{F}\{ f(x - x_0) \} = \int_{-\infty}^{\infty} f(x - x_0) \, e^{-i 2\pi \omega x} \,dx \]
+    \[ \mathcal{F}\{ f(x - x_0) \} = \int_{-\infty}^{\infty} f(x - x_0) \, e^{-i \omega x} \,dx \]
     Let \(u = x - x_0\). Thus, \(x = u + x_0\).
-    \[ = \int_{-\infty}^{\infty} f(u) \, e^{-i 2\pi \omega (u + x_0)} \,dx \]
-    \[ = e^{-i 2\pi \omega x_0} \int_{-\infty}^{\infty} f(u) \, e^{-i 2\pi \omega u} \,dx \]
-    \[ = e^{-i 2\pi \omega x_0} \hat{f}(\omega) \]
+    \[ = \int_{-\infty}^{\infty} f(u) \, e^{-i \omega (u + x_0)} \,dx \]
+    \[ = e^{-i \omega x_0} \int_{-\infty}^{\infty} f(u) \, e^{-i \omega u} \,dx \]
+    \[ = e^{-i \omega x_0} \hat{f}(\omega) \]
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{theorem}
     \label{fourier_derivative}
-    The Fourier Transform of a function's derivative is equal to the transform of the original function multiplied by $i 2\pi \omega$.
-    \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = i 2\pi \omega \hat{f}(\omega) \]
+    The Fourier Transform of a function's derivative is equal to the transform of the original function multiplied by $i \omega$.
+    \begin{equation}
+        \mathcal{F}\{ \frac{d f(x)}{dx} \} = i \omega \mathcal{F}\{ f(x) \}
+    \end{equation}
 \end{theorem}
 
 \begin{proof}
-    \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = \int_{-\infty}^{\infty} \frac{d f(x)}{dx}  \, e^{-i 2\pi \omega x} \,dx \]
-    Using integration by parts, let \(u = f(x)\) and \(dv = e^{-i 2\pi \omega x} dx\).
-    \[ = \left[ f(x) e^{-i 2\pi \omega x} \right]_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f(x) \left( \frac{d}{dx} e^{-i 2\pi \omega x} \right) \,dx \]
+    \[ \mathcal{F}\{ \frac{d f(x)}{dx} \} = \int_{-\infty}^{\infty} \frac{d f(x)}{dx}  \, e^{-i \omega x} \,dx \]
+    Using integration by parts, let \(u = f(x)\) and \(dv = e^{-i \omega x} dx\).
+    \[ = \left[ f(x) e^{-i \omega x} \right]_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f(x) \left( \frac{d}{dx} e^{-i \omega x} \right) \,dx \]
     Since \(f(x)\) must be continuous and integrable to be differentiable and take the Fourier Transform on \(\mathbb{R}\), \(\lim_{x \to -\infty}=\lim_{x \to \infty}=0\) must be true. Thus, the first term is equal to zero. 
-    \[ = - \int_{-\infty}^{\infty} f(x) \left( -i 2\pi \omega e^{-i 2\pi \omega x} \right) \,dx \]
-    \[ = i 2\pi \omega \int_{-\infty}^{\infty} f(x) e^{-i 2\pi \omega x} \,dx \]
-    \[ = i 2\pi \omega \hat{f}(\omega) \]
+    \[ = - \int_{-\infty}^{\infty} f(x) \left( -i \omega e^{-i \omega x} \right) \,dx \]
+    \[ = i \omega \int_{-\infty}^{\infty} f(x) e^{-i \omega x} \,dx \]
+    \[ = i \omega \mathcal{F}\{ f(x) \} \]
 \end{proof}

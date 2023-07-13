@@ -12,7 +12,9 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{theorem}{Theorem}[section]
+\crefname{equation}{Equation}{Equations}
 \crefname{lemma}{Lemma}{Lemmas}
+\crefname{theorem}{Theorem}{Theorems}
 
 % \title{To what extent can Fourier Analysis be used to solve Ordinary Differential Equations and Partial Differential Equations?}
 % \author{Saptak Das}
@@ -28,12 +30,14 @@
 \label{section:introduction}
 This year I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates.
 
-\[ \frac{dS}{dt} = -\frac{\beta S I}{N} + \mu R \]
-\[ \frac{dE}{dt} = \frac{\beta S I}{N} - \phi E \]
-\[ \frac{dI}{dt} = \phi E - \zeta I - \gamma I - \alpha I \]
-\[ \frac{dQ}{dt} = \zeta I - \kappa Q - \epsilon Q \]
-\[ \frac{dR}{dt} = \gamma I + \kappa Q - \mu R \]
-\[ \frac{dD}{dt} = \alpha I + \epsilon Q \]
+\begin{align}        
+    \frac{dS}{dt} &= -\frac{\beta S I}{N} + \mu R \\
+    \frac{dE}{dt} &= \frac{\beta S I}{N} - \phi E \\
+    \frac{dI}{dt} &= \phi E - \zeta I - \gamma I - \alpha I \\
+    \frac{dQ}{dt} &= \zeta I - \kappa Q - \epsilon Q \\
+    \frac{dR}{dt} &= \gamma I + \kappa Q - \mu R \\
+    \frac{dD}{dt} &= \alpha I + \epsilon Q
+\end{align}
 
 \noindent
 where:

@@ -4,24 +4,37 @@
 Fourier Analysis was first discovered when Joseph Fourier first developed the Heat Equation. The Heat Equation models the flow of heat along a certain heat profile over time. In this example, a 1D solution will be derived and solved.
 
 \subsubsection{Brief Derivation}
-\(\alpha\) is the thermal diffusivity of the rod.
+
+
 \[ \frac{\partial u}{\partial t} = \alpha^2 \frac{\partial^2 u}{\partial t^2} \]
+\noindent
+\(\alpha\) is the thermal diffusivity of the rod.
 \[ u_t = \alpha^2 u_{xx} \]
 
 \subsubsection{Application of the Fourier Transform}
 Since \(u(x,t)\) is defined as the temperature of the rod at position \(x\) and time \(t\), we can apply the Fourier Transform to \(u(x,t)\) with respect to position \(x\) to reduce the PDE derived in the previous section into an ODE. Thus, let \(\hat{u}(\kappa,t)\) be the Fourier Transform of \(u(x,t)\) with respect to \(x\).
-
-\[ \mathcal{F} \left\{ u_t \right\} = \mathcal{F} \left\{ \alpha^2 u_{xx} \right\} \]
+\begin{equation}
+    \mathcal{F} \left\{ u_t \right\} = \mathcal{F} \left\{ \alpha^2 u_{xx} \right\}
+\end{equation}
 
 Using \cref{fourier_scaling},
-
-\[ \mathcal{F} \left\{ u_t \right\} = \alpha^2 \mathcal{F} \left\{ u_{xx} \right\} \]
+\begin{equation}
+    \mathcal{F} \left\{ u_t \right\} = \alpha^2 \mathcal{F} \left\{ u_{xx} \right\}
+\end{equation}
 
 Using \cref{fourier_derivative},
-\[ \frac{\partial \hat{u}}{\partial t} = \alpha^2 \left( -\kappa^2 \right) \hat{u} \]
+    \begin{align}
+        \mathcal{F}\{ \frac{\partial^2 u(x, t)}{\partial x^2} \} & = i \kappa \mathcal{F}\{ \frac{d u(x, t)}{dx} \} \\
+        & = -\kappa^2 \mathcal{F}\{ u(x, t) \} \\
+        & = -\kappa^2 \hat{u}
+    \end{align}
 
 Therefore,
-\[ \frac{\partial \hat{u}}{\partial t} = -4 \alpha^2 \kappa^2 \pi^2 \hat{u} \]
+\begin{align}
+    \mathcal{F} \left\{ u_t \right\} &= -\alpha^2 \kappa^2 \hat{u} \\
+    \frac{d \hat{u}}{dt} &= -\alpha^2 \kappa^2 \hat{u}
+\end{align}
+
 
 \subsubsection{Numerical Solution to Heat Equation}
 

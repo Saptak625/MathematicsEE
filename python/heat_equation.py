@@ -53,8 +53,9 @@ x = np.arange(u_plot.shape[1])
 y = np.arange(u_plot.shape[0])
 X, Y = np.meshgrid(x, y)
 
-ax.plot_surface(X, Y, u_plot, cmap='plasma')
-cbar = plt.colorbar(ax.plot_surface(X, Y, u_plot, cmap='viridis'), ax=ax)
+cmap = 'plasma'
+ax.plot_surface(X, Y, u_plot, cmap=cmap)
+cbar = plt.colorbar(ax.plot_surface(X, Y, u_plot, cmap=cmap), ax=ax)
 cbar.set_label('Temperature')
 
 ax.set_xlabel('Position')

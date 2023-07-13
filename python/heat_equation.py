@@ -24,7 +24,7 @@ u0hat_ri = np.concatenate((u0hat.real,u0hat.imag))
 
 # Simulate in Fourier frequency domain
 dt = 0.1
-t = np.arange(0,10,dt)
+t = np.arange(0,1000,dt)
 
 def rhsHeat(uhat_ri,t,kappa,a):
     uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
@@ -43,17 +43,27 @@ for k in range(len(t)):
 
 u = u.real    
 
-# Waterfall plot
+# Mesh plot
+u_plot = u[0:-1:10,:]
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
+ax.view_init(elev=22.5, azim=45, roll=0)
 
-u_plot = u[0:-1:10,:]
-for j in range(u_plot.shape[0]):
-    ys = j*np.ones(u_plot.shape[1])
-    ax.plot(x,ys,u_plot[j,:])
-    
+x = np.arange(u_plot.shape[1])
+y = np.arange(u_plot.shape[0])
+X, Y = np.meshgrid(x, y)
+
+ax.plot_surface(X, Y, u_plot, cmap='plasma')
+cbar = plt.colorbar(ax.plot_surface(X, Y, u_plot, cmap='viridis'), ax=ax)
+cbar.set_label('Temperature')
+
+ax.set_xlabel('Position')
+ax.set_ylabel('Time')
+ax.set_zlabel('Temperature')
+ax.set_title('Heat Equation Numerical Solution')
+
 # Image plot
-plt.figure()
-plt.imshow(np.flipud(u), aspect=8)
-plt.axis('off')
+# plt.figure()
+# plt.imshow(np.flipud(u), aspect=8)
+# plt.axis('off')
 plt.show()

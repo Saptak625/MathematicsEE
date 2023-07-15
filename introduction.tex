@@ -1,0 +1,45 @@
+\section{Introduction}
+\label{section:introduction} 
+The allure of differential equations and Fourier analysis for me lies in their ability to unravel the intricate patterns of nature and unlock the hidden harmonies within complex systems. 
+The ubiquitous presence of these fields across diverse scientific disciplines from physics and engineering to biology and economics help us understand the phenomena of celestial orbits and fluid flow to disease spread and stock market trends using one uniform language. 
+
+Recently, I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates.
+
+\begin{align}        
+    \frac{dS}{dt} &= -\frac{\beta S I}{N} + \mu R \\
+    \frac{dE}{dt} &= \frac{\beta S I}{N} - \phi E \\
+    \frac{dI}{dt} &= \phi E - \zeta I - \gamma I - \alpha I \\
+    \frac{dQ}{dt} &= \zeta I - \kappa Q - \epsilon Q \\
+    \frac{dR}{dt} &= \gamma I + \kappa Q - \mu R \\
+    \frac{dD}{dt} &= \alpha I + \epsilon Q
+\end{align}
+
+\noindent
+where:
+\begin{itemize}
+    \item $N$ is the total population.
+    \item $\beta$ is the contact rate (1/days).
+    \item $\phi$ is the incubation rate (1/days).
+    \item $\zeta$ is the quarantine rate (1/days).
+    \item $\gamma$ is the recovery rate (non-quarantine) (1/days).
+    \item $\kappa$ is the recovery rate (quarantine) (1/days).
+    \item $\mu$ is the immunity wearoff rate (1/days).
+    \item $\alpha$ is the case fatality rate (non-quarantine) (1/days).
+    \item $\epsilon$ is the case fatality rate (quarantine) (1/days).
+\end{itemize}
+
+\noindent
+I was astonished by how elegantly this model was described in the language of differential equations.
+Hence, through differential equations, I discovered a simple language that unveils the secrets of the behavior of a system and its change over time. 
+
+Fourier analysis, on the other hand, allowed me to deconstruct complex phenomena into fundamental sine and cosine components, revealing the underlying frequencies and patterns. 
+% TODO: Give an example of this...?
+In my research at my R\&D internship, I utilized Fourier analysis to analyze the frequency content of a complex, noisy, non-stationary vibration signal from an IMU and perform order analysis to study and understand the fundamental orders/frequencies of the system.
+I was amazed how clear this coordinate transformation made the signal and how much information it revealed about the system's behavior.
+Thus, I became fascinated by their practical applications across scientific disciplines, enabling us to predict, simulate, and optimize the behavior of diverse systems. 
+Embracing the power of differential equations and Fourier analysis, I embarked on a lifelong journey to explore and understand the world's mysteries, driven by an insatiable curiosity to uncover the harmony and order that underlie our complex reality.
+
+In this paper, I will explore the extent to which Fourier analysis can be utilized to solve ordinary differential equations (ODEs) and partial differential equations (PDEs).
+
+
+% TODO: Explain why you chose this topic. Why is this topic important and interesting to study?

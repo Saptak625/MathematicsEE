@@ -2,7 +2,7 @@
 \label{section:background}
 \subsection{Differential Equations}
 \subsubsection{Why are Differential Equations important?}
-Differential Equations are extremely powerful in their ability to model various systems in applied mathematics, physics, and engineering. Calculus is the mathematics of change. Hence, differential equations, which relate the derivatives or integrals of a function to the function itself, can very elegantly summarize the behavior of otherwise complex, dynamic systems.
+Calculus is the mathematics of change. Hence, differential equations, which relate the derivatives or integrals of a function to the function itself, can very elegantly summarize the behavior of otherwise complex, dynamic systems. As a result, differential equations are extremely powerful in their ability to model various systems in applied mathematics, physics, and engineering.
 
 For example, the Lotka-Volterra equations describe the dynamics of populations of predators and prey. These equations are described below.
 
@@ -31,8 +31,14 @@ where:
 \end{definition}
 
 \begin{definition}
-    A system of differential equations is said to be linear if and only if the equations follow the form:
-    \[ a_0 y + a_1 y' + a_2 y'' \dots + a_n y^{(n)} = b(x) \]
+    If \(x_1(t)\) and \(x_2(t)\) are both solutions to a linear system of differential equations, then any linear superposition is also a solution to the system, namely anything in the form:
+    \begin{equation}
+        x(t) = c_1 x_1(t) + c_2 x_2(t) 
+    \end{equation}
+    More formally, a system of differential equations is said to be linear if and only if the equations follows the form:
+    \begin{equation}
+        a_0 y + a_1 y' + a_2 y'' \dots + a_n y^{(n)} = b(x)
+    \end{equation}
     \noindent
     where $a_0, a_1, a_2, ..., a_n$ are any differentiable functions (do not need to be linear).
 \end{definition}
@@ -63,18 +69,18 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
 
 \subsubsection{Fourier and Inverse Fourier Transforms}
 \begin{definition}
-    For a continuous function $f(x)$, the continuous Fourier Transform $\mathcal{F}\{ f(x) \}$ (CFT) is defined as below. The transform returns the frequency space function $\hat{f}(\omega)$.
+    For a continuous function $f(x)$, the continuous Fourier Transform $\mathcal{F}\{ f(x) \}$ (CFT) is defined as below. The transform returns the frequency space function $F(\omega)$.
     \begin{equation}
-        \hat{f}(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i \omega x} \,dx
+        F(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i \omega x} \,dx
     \end{equation}
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{definition}
-    In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ \hat{f}(\omega) \}$ (IFFT) can be applied as defined below.
+    In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ F(\omega) \}$ (IFFT) can be applied as defined below.
     \begin{equation} \label{eq:heaviside_step}
-        f(x) = \mathcal{F}^{-1}\{ \hat{f}(\omega) \} = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(\omega) \, e^{i \omega x} \,d \omega
+        f(x) = \mathcal{F}^{-1}\{ F(\omega) \} = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) \, e^{i \omega x} \,d \omega
     \end{equation}
 \end{definition}
 
@@ -141,16 +147,16 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
     \label{fourier_shift}
     The Fourier Transform can be shifted easily along the axis of the transform. When a function \(f(x)\) along the x-axis by \(x_0\) units, the transform of the shifted function is equal to the transform of the original function multiplied by $e^{-i \omega x_0}$.
     \begin{equation}
-        \mathcal{F}\{ f(x - x_0) \} = e^{-i \omega x_0} \hat{f}(\omega)
+        \mathcal{F}\{ f(x - x_0) \} = e^{-i \omega x_0} F(\omega)
     \end{equation}
 \end{theorem}
 
 \begin{proof}
     \[ \mathcal{F}\{ f(x - x_0) \} = \int_{-\infty}^{\infty} f(x - x_0) \, e^{-i \omega x} \,dx \]
-    Let \(u = x - x_0\). Thus, \(x = u + x_0\).
-    \[ = \int_{-\infty}^{\infty} f(u) \, e^{-i \omega (u + x_0)} \,dx \]
-    \[ = e^{-i \omega x_0} \int_{-\infty}^{\infty} f(u) \, e^{-i \omega u} \,dx \]
-    \[ = e^{-i \omega x_0} \hat{f}(\omega) \]
+    Let \(u = x - x_0\). Thus, \(x = u + x_0\) and \(dx = du\).
+    \[ = \int_{-\infty}^{\infty} f(u) \, e^{-i \omega (u + x_0)} \,du \]
+    \[ = e^{-i \omega x_0} \int_{-\infty}^{\infty} f(u) \, e^{-i \omega u} \,du \]
+    \[ = e^{-i \omega x_0} F(\omega) \]
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

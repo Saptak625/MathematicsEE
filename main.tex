@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{indentfirst}
 \usepackage{hyperref}
@@ -7,6 +7,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath,amssymb}
 \usepackage{cleveref}
+\usepackage{setspace}
+\usepackage[american]{babel}
+\usepackage{natbib}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -21,9 +24,18 @@
 \crefname{lemma}{Lemma}{Lemmas}
 \crefname{theorem}{Theorem}{Theorems}
 
+\DeclareMathOperator{\sech}{sech}
+
 % \title{To what extent can Fourier Analysis be used to solve Ordinary Differential Equations and Partial Differential Equations?}
 % \author{Saptak Das}
 % \date{June 2023}
+
+%% ===============================================
+%% Setting the line spacing (3 options: only pick one)
+% \doublespacing
+% \singlespacing
+\onehalfspacing
+%% ===============================================
 
 \begin{document}
 \include{title}
@@ -31,39 +43,9 @@
 \tableofcontents
 \newpage
 
-\section{Introduction}
-\label{section:introduction}
-This year I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates.
-
-\begin{align}        
-    \frac{dS}{dt} &= -\frac{\beta S I}{N} + \mu R \\
-    \frac{dE}{dt} &= \frac{\beta S I}{N} - \phi E \\
-    \frac{dI}{dt} &= \phi E - \zeta I - \gamma I - \alpha I \\
-    \frac{dQ}{dt} &= \zeta I - \kappa Q - \epsilon Q \\
-    \frac{dR}{dt} &= \gamma I + \kappa Q - \mu R \\
-    \frac{dD}{dt} &= \alpha I + \epsilon Q
-\end{align}
-
-\noindent
-where:
-\begin{itemize}
-    \item $N$ is the total population.
-    \item $\beta$ is the contact rate (1/days).
-    \item $\phi$ is the incubation rate (1/days).
-    \item $\zeta$ is the quarantine rate (1/days).
-    \item $\gamma$ is the recovery rate (non-quarantine) (1/days).
-    \item $\kappa$ is the recovery rate (quarantine) (1/days).
-    \item $\mu$ is the immunity wearoff rate (1/days).
-    \item $\alpha$ is the case fatality rate (non-quarantine) (1/days).
-    \item $\epsilon$ is the case fatality rate (quarantine) (1/days).
-\end{itemize}
-
-% TODO: Explain why you chose this topic. Why is this topic important and interesting to study?
-% TODO: Clearly define the focus of this paper and make sure to maintain that focus throughout the paper...
-
-% \lipsum[3]
-
+\input{introduction}
 \input{background}
 \input{body}
+\input{conclusion}
 
 \end{document}

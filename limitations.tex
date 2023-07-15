@@ -1,0 +1,12 @@
+\section{Limitations of the Fourier Transform}
+As shown by the various examples, Fourier transforms are a powerful tool for solving differential equations. However, there are certain situations where Fourier transforms may not be applicable or effective. Here are a few cases:
+
+% TODO: Rephrase and Adjust as needed...
+\begin{enumerate}
+    % Talk about how important linearity is as a concept in solving differential equations. How this is important for Fourier Transforms.
+    \item Nonlinear Equations: Fourier transforms are generally not applicable to nonlinear differential equations. The transforms rely on linearity properties, such as superposition and scaling, which do not hold for nonlinear equations. In such cases, other techniques like numerical methods or perturbation methods may be more suitable.
+    \item Variable Coefficients: Fourier transforms are most commonly used for differential equations with constant coefficients. When the coefficients of the differential equation are functions of the independent variable or have a complicated dependence, the application of Fourier transforms becomes more challenging. In such cases, specialized techniques like Laplace transforms or numerical methods may be employed.
+    \item Boundary Conditions: Fourier transforms are well-suited for solving differential equations on unbounded domains or for periodic problems. However, when dealing with differential equations on finite intervals or with non-periodic boundary conditions, additional techniques like separation of variables, finite difference methods, or numerical techniques may be required.
+    \item Discontinuous Functions: Fourier transforms rely on the assumption that the functions involved are well-behaved and continuous. If the functions or their derivatives exhibit discontinuities, the Fourier transform may not be directly applicable. Techniques like generalized functions (e.g., distributions) or other specialized methods may be employed in these cases.
+    \item Stochastic or Random Processes: Fourier transforms are primarily used for deterministic differential equations. When dealing with stochastic or random processes, such as in the field of stochastic differential equations, other tools like stochastic calculus, probability theory, or numerical simulation methods may be more appropriate.
+\end{enumerate}

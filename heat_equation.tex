@@ -26,28 +26,37 @@ Or in subscript notation,
 \end{equation}
 
 \subsubsection{Application of the Fourier Transform}
-Since \(u(x,t)\) is defined as the temperature of the rod at position \(x\) and time \(t\), we can apply the Fourier Transform to \(u(x,t)\) with respect to position \(x\) to reduce the PDE derived in the previous section into an ODE. Thus, let \(\hat{u}(\kappa,t)\) be the Fourier Transform of \(u(x,t)\) with respect to \(x\).
+Since \(u(x,t)\) is defined as the temperature of the rod at position \(x\) and time \(t\), we can apply the Fourier Transform to \(u(x,t)\) with respect to position \(x\) to reduce the \cref{eq:heat_equation_subscript} PDE into an ODE. Thus, let \(U(\kappa,t)\) be the Fourier Transform of \(u(x,t)\) with respect to \(x\).
+
+\vspace{5mm}
+\noindent
+Taking the Fourier Transform of \cref{eq:heat_equation_subscript} with respect to \(x\),
 \begin{equation}
     \mathcal{F} \left\{ u_t \right\} = \mathcal{F} \left\{ \alpha^2 u_{xx} \right\}
 \end{equation}
 
+\noindent
 Using \cref{fourier_scaling},
 \begin{equation}
     \mathcal{F} \left\{ u_t \right\} = \alpha^2 \mathcal{F} \left\{ u_{xx} \right\}
 \end{equation}
 
+\noindent
 Using \cref{fourier_derivative},
-    \begin{align}
-        \mathcal{F}\{ \frac{\partial^2 u(x, t)}{\partial x^2} \} & = i \kappa \mathcal{F}\{ \frac{d u(x, t)}{dx} \} \\
-        & = -\kappa^2 \mathcal{F}\{ u(x, t) \} \\
-        & = -\kappa^2 \hat{u}
-    \end{align}
+\begin{align}
+    \mathcal{F} \left\{ \frac{\partial^2 u(x, t)}{\partial x^2} \right\} & = i \kappa \mathcal{F} \left\{ \frac{\partial u(x, t)}{\partial x} \right\} \\
+    & = -\kappa^2 \mathcal{F}\{ u(x, t) \} \\
+    & = -\kappa^2 U
+\end{align}
 
+\noindent
 Therefore,
 \begin{align}
-    \mathcal{F} \left\{ u_t \right\} &= -\alpha^2 \kappa^2 \hat{u} \\
-    \frac{d \hat{u}}{dt} &= -\alpha^2 \kappa^2 \hat{u} \label{eq:heat_equation_fourier}
+    \mathcal{F} \left\{ u_t \right\} &= -\alpha^2 \kappa^2 U \\
+    \frac{dU}{dt} &= -\alpha^2 \kappa^2 U \label{eq:heat_equation_fourier}
 \end{align}
+
+\subsubsection{Boundary Conditions} % TODO: Add boundary conditions to the heat equation.
 
 \subsubsection{Numerical Solution to Heat Equation} % TODO: Link the Python code for this numerical integration in the appendix.
 \cref{eq:heat_equation_fourier} is a decoupled ODE that can be easily numerically integrated. A numerical solution to \cref{eq:heat_equation_fourier} using a fifth-order Runge-Kutta approximation in Python is presented below:

@@ -1,7 +1,23 @@
 \subsection{Driven Simple Harmonic Oscillator with Damping}
 
 \subsubsection{Brief Derivation}
-Below is the equation of motion for a driven simple harmonic oscillator (SHO) with damping:
+Let us define a Simple Harmonic Oscillator (SHO) of mass \(m\) and is attached to a spring with spring constant \(k\).
+The SHO is subject to a damping force with damping coefficient \(\gamma\) and an additional driving force \(f(t)\).
+
+\vspace{5mm}
+
+Define \(\omega_0 = \sqrt{\frac{k}{m}}\) as the natural frequency of the SHO and the damping force as \(F_d = -2 m \gamma v\), where \(v\) is the velocity of the SHO.
+
+\noindent
+Using Newton's Second Law,
+\begin{align}
+    \Sigma F = ma &= -m \omega_0^2 x - 2 m \gamma v + f(t) \\
+    m \frac{d^2 x}{dt^2} &= -m \omega_0^2 x - 2 m \gamma \frac{dx}{dt} + f(t)
+\end{align}
+
+\noindent
+Dividing by \(m\) and rearranging terms, we get the following differential equation for a driven SHO with damping:
+
 \begin{equation} \label{eq:driven_sho_equation}
     \frac{d^2 x}{dt^2} + 2 \gamma \frac{dx}{dt} + \omega_0^2 x(t) = \frac{f(t)}{m}
 \end{equation}
@@ -29,10 +45,32 @@ Using \cref{fourier_derivative},
     & = -\omega^2 X(\omega)
 \end{align}
 
-\subsubsection{Boundary Conditions} % TODO: Add boundary conditions to the heat equation.
+\noindent
+Therefore,
+\begin{align}
+    -\omega^2 X(\omega) + 2 \gamma i \omega X(\omega) + \omega_0^2 X(\omega) &= \frac{F(\omega)}{m} \\
+    X(\omega) \left( \omega_0^2 - \omega^2 + 2 \gamma i \omega \right) &= \frac{F(\omega)}{m}
+\end{align}
+
+\noindent
+Thus,
+\begin{equation} \label{eq:driven_sho_fourier}
+    X(\omega) = \frac{F(\omega)}{m \left( \omega_0^2 - \omega^2 + 2 \gamma i \omega \right)}
+\end{equation}
+
+% TODO: Maybe make a section on summarizing the solving procedure and explaining exactly how the Fourier Transform helps us solve the ODE/PDE.
+By applying the Fourier Transform to the driven SHO equation, we have reduced the problem from solving a second order ODE (\cref{eq:driven_sho_equation}) to solving a simple algebraic equation (\cref{eq:driven_sho_fourier}). This is a significant reduction in complexity.
+
+Once we have solved for \(X(\omega)\), we can take the inverse Fourier Transform of \cref{eq:driven_sho_fourier} to obtain \(x(t)\).
+
+\begin{align} \label{eq:driven_sho_inverse_fourier}
+    x(t) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} X(\omega) e^{i \omega t} d\omega \\
+    &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} \frac{F(\omega)}{m \left( \omega_0^2 - \omega^2 + 2 \gamma i \omega \right)} e^{i \omega t} d\omega
+\end{align}
+
+\subsubsection{Boundary Conditions} % TODO: Add boundary conditions to the driven SHO equation.
 
 \subsubsection{Numerical Solution to Driven SHO with Damping Equation}
-
 
 % \subsubsection{Analytical Solution to Wave Equation} 
 % This is a maybe section. Possibly replace this section with a section on the applicability of the Fourier Transform to reduce PDEs to ODEs...?

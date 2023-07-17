@@ -1,0 +1,60 @@
+\subsection{Black-Scholes Equation}
+The Black-Scholes equation is a partial differential equation that describes the price of the European call or put option over time.
+
+\subsubsection{Brief Derivation}
+Let \(V\) be the price of the option, \(S\) be the price of the underlying asset, \(t\) be the time, \(\sigma\) be the volatility of the underlying asset, and \(r\) be the risk-free interest rate.
+
+\begin{equation} \label{eq:black_scholes_equation}
+    \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS\frac{\partial V}{\partial S} - rV = 0
+\end{equation}
+
+\subsubsection{Application of the Fourier Transform}
+Let us take the Fourier Transform of \cref{eq:black_scholes_equation} with respect to \(S\). Thus, let \(\hat{V}(\kappa, t)\) be the Fourier Transform of \(V(S, t)\).
+
+\begin{equation}
+    \mathcal{F} \left\{ \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS\frac{\partial V}{\partial S} -  rV \right\} = \mathcal{F} \left\{ 0 \right\}
+\end{equation}
+
+\noindent
+Using \cref{fourier_linearity} and the fact that the integral of the zero function is zero,
+\begin{equation}
+    \mathcal{F} \left\{ \frac{\partial V}{\partial t} \right\} + \mathcal{F} \left\{ \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} \right\} + \mathcal{F} \left\{ rS\frac{\partial V}{\partial S} \right\} - \mathcal{F} \left\{ rV \right\} = 0
+\end{equation}
+
+\noindent
+Using \cref{fourier_scaling},
+\begin{equation} 
+    \mathcal{F} \left\{ \frac{\partial V}{\partial t} \right\} + \frac{1}{2}\sigma^2 \mathcal{F} \left\{ S^2 \frac{\partial^2 V}{\partial S^2} \right\} + r \mathcal{F} \left\{ S\frac{\partial V}{\partial S} \right\} - r \mathcal{F} \left\{ V \right\} = 0
+\end{equation}
+
+\noindent
+Using \cref{fourier_derivative},
+\begin{align}
+    \mathcal{F} \left\{ \frac{\partial V}{\partial S} \right\} &= i \kappa \mathcal{F} \left\{ V(S, t) \right\} \\
+    &= i \kappa \hat{V}(\kappa, t) \\
+    \mathcal{F} \left\{ \frac{\partial^2 V}{\partial S^2} \right\} & = i \kappa \mathcal{F} \left\{ \frac{dV}{dS} \right\} \\
+    & = -\kappa^2 \hat{V}(\kappa, t)
+\end{align}
+
+\noindent
+Using \cref{fourier_multiplication},
+\begin{align}
+    \mathcal{F} \left\{ S\frac{\partial V}{\partial S} \right\} &= \frac{1}{2 \pi}( \mathcal{F} \left\{ S \right\} * \mathcal{F} \left\{ \frac{\partial V}{\partial S} \right\} ) \\
+    &= \frac{1}{2 \pi}( \mathcal{F} \left\{ S \right\} * i \kappa \hat{V} ) \\
+    \mathcal{F} \left\{ S^2 \frac{\partial^2 V}{\partial S^2} \right\} &= \frac{1}{2 \pi}( \mathcal{F} \left\{ S^2 \right\} * \mathcal{F} \left\{ \frac{\partial^2 V}{\partial S^2} \right\} ) \\
+    &= \frac{1}{2 \pi}( \mathcal{F} \left\{ S^2 \right\} * -\kappa^2 \hat{V} ) \\
+\end{align}
+
+\noindent
+Therefore,
+\begin{align}
+    \frac{\partial \hat{V}}{\partial t} + \frac{1}{2}\sigma^2 \mathcal{F} \left\{ S^2 \frac{\partial^2 V}{\partial S^2} \right\} + r \mathcal{F} \left\{ S\frac{\partial V}{\partial S} \right\} - r \hat{V} &= 0 \\
+    \frac{\partial \hat{V}}{\partial t} + \frac{1}{2}\sigma^2 \frac{1}{2 \pi}( \mathcal{F} \left\{ S^2 \right\} * -\kappa^2 \hat{V} ) + r \frac{1}{2 \pi}( \mathcal{F} \left\{ S \right\} * i \kappa \hat{V} ) - r \hat{V} &= 0 \\
+    \frac{\partial \hat{V}}{\partial t} - \frac{1}{4 \pi}\sigma^2 \kappa^2 ( \mathcal{F} \left\{ S^2 \right\} * \hat{V} ) + \frac{1}{2 \pi} r i \kappa ( \mathcal{F} \left\{ S \right\} * \hat{V} ) - r \hat{V} &= 0
+\end{align}
+
+\noindent
+Thus,
+\begin{equation}
+    \frac{d \hat{V}}{dt} = \frac{1}{4 \pi}\sigma^2 \kappa^2 ( \mathcal{F} \left\{ S^2 \right\} * \hat{V} ) - \frac{1}{2 \pi} r i \kappa ( \mathcal{F} \left\{ S \right\} * \hat{V} ) + r \hat{V}
+\end{equation}

@@ -26,6 +26,12 @@ Dividing by \(m\) and rearranging terms, we get the following differential equat
 \noindent
 Let us take the Fourier Transform of \cref{eq:driven_sho_equation} with respect to \(t\). Thus, let \(X(\omega)\) be the Fourier Transform of \(x(t)\) and \(F(\omega)\) be the Fourier Transform of \(f(t)\).
 
+\begin{equation}
+    \mathcal{F} \left\{ \frac{d^2 x}{dt^2} + 2 \gamma \frac{dx}{dt} + \omega_0^2 x(t) \right\} = \mathcal{F} \left\{ \frac{f(t)}{m} \right\}
+\end{equation}
+
+\noindent
+Using \cref{fourier_linearity},
 \begin{equation} 
     \mathcal{F} \left\{ \frac{d^2 x}{dt^2} \right\} + \mathcal{F} \left\{ 2 \gamma \frac{dx}{dt} \right\} + \mathcal{F} \left\{ \omega_0^2 x(t) \right\} = \mathcal{F} \left\{ \frac{f(t)}{m} \right\}
 \end{equation}
@@ -71,6 +77,15 @@ Once we have solved for \(X(\omega)\), we can take the inverse Fourier Transform
 \subsubsection{Boundary Conditions} % TODO: Add boundary conditions to the driven SHO equation.
 
 \subsubsection{Numerical Solution to Driven SHO with Damping Equation}
+\cref{eq:driven_sho_inverse_fourier} can be easily solved numerically using the Fast Fourier Transform (FFT) and the Inverse Fast Fourier Transfrom (IFFT) algorithms. The FFT and IFFT algorithms are optimized algorithms for computing the Discrete Fourier Transform (DFT) and the Inverse Discrete Fourier Transform (IDFT) of a sequence.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=110mm,height=\textheight,keepaspectratio]{images/driven_sho_equation_numerical.png}
+    \caption{Defining the SHO parameters such that \(m=1\), \(\omega_0=0.15\), \(\gamma=0.005\), and \(f(t)=2 \sin (\omega_0 t)\), above is the solution to the driven SHO equation with damping using the FFT and IFFT algorithms in Python.}
+    \label{fig:driven_sho_equation_numerical}
+\end{figure}
+
 
 % \subsubsection{Analytical Solution to Wave Equation} 
 % This is a maybe section. Possibly replace this section with a section on the applicability of the Fourier Transform to reduce PDEs to ODEs...?

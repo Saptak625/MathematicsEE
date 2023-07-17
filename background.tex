@@ -70,7 +70,7 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
 \subsubsection{Fourier and Inverse Fourier Transforms}
 \begin{definition}
     For a continuous function $f(x)$, the continuous Fourier Transform $\mathcal{F}\{ f(x) \}$ (CFT) is defined as below. The transform returns the frequency space function $F(\omega)$.
-    \begin{equation}
+    \begin{equation} \label{eq:fourier_transform}
         F(\omega) = \mathcal{F}\{ f(x) \} = \int_{-\infty}^{\infty} f(x)  \, e^{-i \omega x} \,dx
     \end{equation}
 \end{definition}
@@ -79,7 +79,7 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
 
 \begin{definition}
     In order to reverse the Fourier Transform, the Inverse Fourier Transform $\mathcal{F}^{-1}\{ F(\omega) \}$ (IFFT) can be applied as defined below.
-    \begin{equation} \label{eq:heaviside_step}
+    \begin{equation} \label{eq:inverse_fourier_transform}
         f(x) = \mathcal{F}^{-1}\{ F(\omega) \} = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) \, e^{i \omega x} \,d \omega
     \end{equation}
 \end{definition}
@@ -87,7 +87,7 @@ Fourier Analysis is a field of mathematics that studies how complex function wav
 \subsubsection{Fourier Series}
 Let \(f(x)\) be defined as the following periodic, yet discontinuous square waveform signal (Heaviside Step Function):
 
-\begin{equation}
+\begin{equation} \label{eq:heaviside_step}
 f(x)=
     \begin{cases}
         1 & \text{if } nT < x < \frac{T(2n+1)}{2} , n \in \mathbb{Z}\\
@@ -176,4 +176,29 @@ The Fourier Transform, which is a coordinate transform, is important and useful 
     \[ = - \int_{-\infty}^{\infty} f(x) \left( -i \omega e^{-i \omega x} \right) \,dx \]
     \[ = i \omega \int_{-\infty}^{\infty} f(x) e^{-i \omega x} \,dx \]
     \[ = i \omega \mathcal{F}\{ f(x) \} \]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+    \label{fourier_multiplication}
+    The Fourier Transform of the product of two functions is equal to the convolution of the transforms of the individual functions over \(2 \pi\).
+    \begin{equation}
+        \mathcal{F}\{ f(x) g(x) \} = \frac{1}{2 \pi}( F(\omega) * G(\omega) )
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    \[ \mathcal{F}\{ f(x) g(x) \} = \int_{-\infty}^{\infty} f(x) g(x) \, e^{-i \omega x} \,dx \]
+    From the definition of the inverse Fourier Transform in \cref{eq:inverse_fourier_transform},
+    \[ = \frac{1}{2 \pi} \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} F(\kappa) e^{i \kappa x} \,d\kappa \right) g(x) \, e^{-i \omega x} \,dx \]
+    Using Fubini's Theorem, we can switch the order of integration.
+    \begin{align*}
+        &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} F(\kappa) \left( \int_{-\infty}^{\infty} g(x) e^{-i \omega x} e^{i \kappa x} \,dx \right) \,d\kappa \\
+        &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} F(\kappa) \left( \int_{-\infty}^{\infty} g(x) e^{-i (\omega - \kappa) x} \,dx \right) \,d\kappa \\
+        &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} F(\kappa) G(\omega - \kappa) \,d\kappa
+    \end{align*}
+    Given the definition of convolution of two functions \(f(x)\) and \(g(x)\) as:
+    \[ f(x) * g(x) = \int_{-\infty}^{\infty} f(\kappa) g(x-\kappa) \,d\kappa \]
+    The Fourier Transform of the product of two functions is equal to the convolution of the transforms of the individual functions over \(2 \pi\).
+    \[ \mathcal{F}\{ f(x) g(x) \} = \frac{1}{2 \pi}( F(\omega) * G(\omega) ) \]
 \end{proof}

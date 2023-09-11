@@ -54,6 +54,7 @@ plt.xlabel('Frequency')
 plt.ylabel('Amplitude')
 plt.title('Driven SHO with Damping')
 plt.legend(loc=1)
+plt.grid()
 plt.show()
 
 # Take the inverse Fourier transform of X
@@ -65,4 +66,5 @@ plt.plot(t,x.real)
 plt.xlabel('Time')
 plt.ylabel('Position')
 plt.title('Driven SHO with Damping')
+plt.grid()
 plt.show()

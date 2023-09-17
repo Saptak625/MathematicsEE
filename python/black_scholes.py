@@ -13,7 +13,7 @@ s = np.arange(0,L,ds) # Define x domain
 
 # Take the Fourier transform of S(t)
 # Perform one-sided FFT
-fourier_unit = np.fft.fft(np.ones_like(s))
+fourier_unit = np.fft.fft(np.ones_like(s)) / len(s)
 fourier_S = -1j * fourier_unit
 fourier_S_squared = -1 * fourier_unit
 

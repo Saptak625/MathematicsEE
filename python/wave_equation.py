@@ -33,16 +33,6 @@ def rhsWave(uhat_ri,t,kappa,c):
 uhat_ri = odeint(rhsWave, u0hat_ri, t, args=(kappa,c))
 uhat = uhat_ri[:,:N] + (1j) * uhat_ri[:,N:]
 
-# Alternatively, simulate in spatial domain
-# def rhsWaveSpatial(u,t,kappa,c):
-#     uhat = np.fft.fft(u)
-#     d_uhat = (1j)*kappa*uhat
-#     d_u = np.fft.ifft(d_uhat).real
-#     du_dt = -c*d_u
-#     return du_dt
-
-# u = odeint(rhsWaveSpatial,u0,t,args=(kappa,c))
-
 # Inverse FFT to bring back to spatial domain
 u = np.zeros_like(uhat)
 
@@ -73,7 +63,7 @@ ax.set_zlabel('Displacement')
 ax.set_title('Wave Equation Numerical Solution')
     
 # Image plot
-plt.figure()
-plt.imshow(np.flipud(u), aspect=8)
-plt.axis('off')
+# plt.figure()
+# plt.imshow(np.flipud(u), aspect=8)
+# plt.axis('off')
 plt.show()

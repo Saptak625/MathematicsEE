@@ -21,13 +21,13 @@ def f(t):
     return 2 * np.sin(omega_0 * t)
 
 # Define parameters
-omega_0 = 0.15    # Natural frequency of the oscillator without damping
-gamma = 0.005 # Damping coefficient
+omega_0 = 15    # Natural frequency of the oscillator without damping
+gamma = 0.5 # Damping coefficient
 x_0 = 0   # Initial position of the oscillator
 m = 1   # Mass of the oscillator
 
 # Define time
-T = 1000
+T = 10
 N = 1000 # Number of discretization points
 dt = T/N
 t = np.linspace(0,T,N)
@@ -44,7 +44,7 @@ omega = np.fft.fftshift(omega)
 X = F/(m*(omega_0**2 - np.power(omega, 2) + 2*1j*gamma*omega))
 
 # Set the initial conditions where omega = 0
-# X[omega == 0] = x_0
+X[omega == 0] = x_0
 
 # Plot the Fourier transform of f(t) and X
 plt.figure()
@@ -58,7 +58,7 @@ plt.grid()
 plt.show()
 
 # Take the inverse Fourier transform of X
-x = np.fft.ifft(X)
+x = np.fft.ifft(X) * len(X)
 
 # Plot the position of the oscillator
 plt.figure()

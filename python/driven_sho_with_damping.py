@@ -11,9 +11,10 @@ t = np.arange(0,T,dt)
 
 # Define parameters
 omega_0 = 0.2    # Natural frequency of the oscillator without damping
+x_0 = 0.5   # Initial position of the oscillator
 gamma = 0.1 # Damping coefficient
 f = 0.2 * np.sin(2 * omega_0 * t)    # Driving force function
-x_0 = 0.5   # Initial position of the oscillator
+x_0 = 0   # Initial position of the oscillator
 m = 200   # Mass of the oscillator
 
 # Define discrete wavenumbers
@@ -23,7 +24,10 @@ omega = 2*np.pi*np.fft.fftfreq(N, d=dt)
 fhat = np.fft.fft(f)
 
 # Define the Fourier transform of the position of the oscillator
-xhat = fhat / (m*(omega_0**2 - omega**2 + 2j*gamma*omega))
+xhat = fhat / (m*(omega_0**2 - np.power(omega, 2) - 2j*gamma*omega))
+
+# Set the initial conditions where omega = 0
+xhat[omega == 0] = x_0
 
 # Plot the Fourier transform of the position of the oscillator
 plt.figure()
@@ -35,7 +39,7 @@ plt.title('Driven SHO with Damping')
 plt.legend(['Real','Imaginary'])
 
 # Take the inverse Fourier transform of the position of the oscillator
-x = np.fft.ifft(xhat)
+x = np.fft.ifft(xhat) * len(xhat)
 
 # Plot the forces
 plt.figure()

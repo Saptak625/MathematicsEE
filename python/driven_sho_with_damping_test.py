@@ -2,7 +2,7 @@ import numpy as np
 from scipy.fft import fft, ifft
 import matplotlib.pyplot as plt
 
-def simulate_driven_oscillator(m, c, k, F, dt):
+def simulate_driven_oscillator(m, c, k, x0, F, dt):
     # Parameters
     num_samples = len(F)
     t = np.arange(0, num_samples * dt, dt)
@@ -14,8 +14,11 @@ def simulate_driven_oscillator(m, c, k, F, dt):
     # Calculate the Fourier transform of the displacement
     X_hat = F_hat / (-m * (2 * np.pi * frequencies)**2 + 1j * 2 * np.pi * frequencies * c + k)
     
+    # Set the initial conditions
+    X_hat[frequencies == 0] = x0
+
     # Inverse Fourier transform to obtain the displacement in time domain
-    x = ifft(X_hat)
+    x = ifft(X_hat) * len(X_hat)
     
     return t, x.real
 
@@ -31,10 +34,11 @@ t = np.arange(0, t_total, dt)
 
 # Driving force (example: sinusoidal)
 omega = 15  # angular frequency
+x0 = 0
 F = np.sin(np.sqrt(2) * omega * t)
 
 # Simulate the driven oscillator
-t_sim, x_sim = simulate_driven_oscillator(m, c, k, F, dt)
+t_sim, x_sim = simulate_driven_oscillator(m, c, k, x0, F, dt)
 
 # Plot the forces
 plt.figure()
@@ -45,7 +49,7 @@ plt.plot(t, F - k*x_sim - c*np.gradient(x_sim, dt), '--', label='Net Force')
 plt.xlabel('Time')
 plt.ylabel('Force')
 plt.title('All Forces')
-plt.grid(True)
+plt.grid()
 plt.legend()
 
 # Plot the results
@@ -54,5 +58,5 @@ plt.plot(t_sim, x_sim)
 plt.xlabel('Time')
 plt.ylabel('Displacement')
 plt.title('Driven Harmonic Oscillator with Damping')
-plt.grid(True)
+plt.grid()
 plt.show()

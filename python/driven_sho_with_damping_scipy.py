@@ -24,12 +24,13 @@ def sho(y, t, m, gamma, omega_0, f):
 
 # Define the driving force
 def f(t):
-    return 2 * np.sin(omega_0 * t)
+    # return 2 * np.sin(omega_0 * t)
+    return 0
 
 # Define parameters
 omega_0 = 0.15    # Natural frequency of the oscillator without damping
 gamma = 0.005 # Damping coefficient
-x_0 = 0   # Initial position of the oscillator
+x_0 = 0.5   # Initial position of the oscillator
 v_0 = 0 # Initial velocity of the oscillator
 m = 1   # Mass of the oscillator
 
@@ -46,5 +47,12 @@ plt.figure()
 plt.plot(t,sol[:,0])
 plt.xlabel('Time')
 plt.ylabel('Position')
+plt.title('Driven SHO with Damping')
+
+# Plot the FFT of the position of the oscillator
+plt.figure()
+plt.plot(np.fft.fftshift(np.fft.fftfreq(N, d=t[1]-t[0])),np.fft.fftshift(np.fft.fft(sol[:,0])))
+plt.xlabel('Frequency')
+plt.ylabel('Amplitude')
 plt.title('Driven SHO with Damping')
 plt.show()

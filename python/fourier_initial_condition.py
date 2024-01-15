@@ -3,38 +3,41 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Parameters
-omega_0 = 0.15    # Natural frequency of the oscillator without damping
-gamma = 0.005 # Damping coefficient
-m = 1   # Mass of the oscillator
+omega_0 = 0.15 / (2 * np.pi)    # Natural frequency of the oscillator without damping
+gamma = 0.0001 # Damping coefficient.
+m = 1000   # Mass of the oscillator
 
 # Define time
-T = 1000
-N = 1000 # Number of discretization points
+T = 2500.0
+N = 100000 # Number of discretization points
 dt = T/N
 t = np.linspace(0,T,N)
 
 # Define the driving force
 def f(t):
-    return np.zeros(len(t))
+    return np.exp(-t/500)
 
 # Make sure to satify the x_0 and v_0 initial conditions
 # Take the Fourier transform of f(t)
 F = np.fft.fft(f(t))
 
 # Define omega
-omega = 2*np.pi * np.fft.fftfreq(N, d=dt)
-omega = np.fft.fftshift(omega)
+omega = np.fft.fftfreq(N, d=dt)
 
 # Solve for X
 # X(\omega) = \frac{F(\omega) - m C_1 \left( i \omega + 2 \gamma \right) - m C_2}{m \left( \omega_0^2 - \omega^2 + 2 \gamma i \omega \right)}
-C_1 = 0.5 # Velocity initial condition
-C_2 = 2*gamma*C_1 # Position initial condition
-X = (F - m*C_1*1j*omega - m*(2*gamma*C_1 - C_2))/(m*(omega_0**2 - np.power(omega, 2) + 2*1j*gamma*omega))
+x_0 = 0.5 # Initial position of the oscillator
+v_0 = 0 # Initial velocity of the oscillator
+C_1 = (-82.385 * x_0 * omega_0**2 - 31.91 * v_0 * omega_0)/dt
+C_2 = (4.78 * x_0 * omega_0**2 - 0.3137 * v_0 * omega_0)/dt
+X = (F - m*C_1*1j*omega - m*(2*gamma*C_1 + C_2))/(m*(omega_0**2 - np.power(omega, 2) + 2*1j*gamma*omega))
 
 # Plot the Fourier transform of f(t) and X
-plt.figure()
-plt.plot(omega,abs(F), label='Fourier Transform of f(t)')
-plt.plot(omega,abs(X), label='Fourier Transform of x(t)')
+plt.figure("Driven SHO with Damping")
+plt.plot(omega,F.real, label='Real f(t)')
+plt.plot(omega,F.imag, label='Imaginary f(t)')
+plt.plot(omega,X.real, label='Real X')
+plt.plot(omega,X.imag, label='Imaginary X')
 plt.xlabel('Frequency')
 plt.ylabel('Amplitude')
 plt.title('Driven SHO with Damping')
@@ -42,11 +45,11 @@ plt.legend(loc=1)
 plt.grid()
 
 # Take the inverse Fourier transform of X
-x = np.fft.ifft(X) * len(X)
+x = np.fft.ifft(X)
 
 # Plot the position of the oscillator
-plt.figure()
-plt.plot(t,x.real)
+plt.figure('Driven SHO with Damping Position')
+plt.plot(t,x.real, label='Fourier Solution')
 plt.xlabel('Time')
 plt.ylabel('Position')
 plt.title('Driven SHO with Damping')

@@ -1,2 +1,2 @@
 # MathematicsEE
-This is my EE on "Differential Equations and Fourier Transforms EE"
+This is the LaTeX and Python files for my IB Extended Essay on "Investigating the Applicability of Fourier Analysis in Solving Nonlinear Partial Differential Equations."

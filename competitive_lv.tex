@@ -1,0 +1,61 @@
+\subsection{Competitive Lotka-Volterra Equations}
+The Lotka-Volterra Equations (\cref{eq:lotka_volterra_1,eq:lotka_volterra_2}) were introduced earlier in \cref{section:background}. However, rather than being a predator-prey relationship, the competitive Lotka-Volterra Equations describes the relationship between two species competing over common resources. Furthermore, this competition leads to the logistic reproduction of the species which is more realistic than the exponential reproduction of the non-competitive model.
+
+\subsubsection{Definition}
+\noindent
+Let us define an ecosystem with the following assumptions:
+\begin{itemize}
+    \item The population of the two species is described by the functions \(x(t)\) and \(y(t)\).
+    \item The per capita growth rate of the populations are \(r_x\) and \(r_y\) respectively.
+    \item The negative impact of population \(x\) due to population \(y\) is given by \(\alpha_{xy}\). Similarly, the negative impact of population \(y\) due to population \(x\) is given by \(\alpha_{yx}\).
+    \item Due to seasons and other natural disasters, there will be a natural increase and decrease in resources. Thus, the carrying capacity \(K(t)\) for populations \(x\) and \(y\) will fluctuate.
+\end{itemize}
+
+\noindent
+Thus, the competitive Lotka-Volterra equations for two species are defined as follows:
+\begin{align}  
+    \frac{dx}{dt} &= r_x x \left(1 - \left(\frac{x + \alpha_{xy} y}{K(t)}\right)\right) \label{eq:competitive_lv_1} \\ 
+    \frac{dy}{dt} &= r_y y \left(1 - \left(\frac{y + \alpha_{yx} x}{K(t)}\right)\right) \label{eq:competitive_lv_2}
+\end{align}
+
+\subsubsection{Application of the Fourier Transform}
+Let us take the Fourier Transform of \cref{eq:competitive_lv_1,eq:competitive_lv_2} with respect to \(t\). Thus, let \(X(\omega)\), \(Y(\omega)\), and \(K_hat(\omega)\) be the respective Fourier Transforms of \(x(t)\), \(y(t)\), and \(K(t)\) with respect to \(t\).
+
+\begin{equation}
+    \mathcal{F}_t \left\{ \frac{dx}{dt} \right\} = \mathcal{F}_t \left\{ r_x x \left(1 - \left(\frac{x + \alpha_{xy} y}{K(t)}\right)\right) \right\}
+\end{equation}
+
+\noindent
+Using \cref{fourier_derivative},
+\begin{align}
+    \mathcal{F}_t \left\{ \frac{dx}{dt} \right\} &= i \omega \mathcal{F}_t \left\{ x(t) \right\} \\
+    &= i \omega X(\omega)
+\end{align}
+
+\noindent
+Using \cref{fourier_multiplication},
+\begin{align}
+    i \omega X(\omega) &= \frac{r_x}{2 \pi} \left( \mathcal{F}_t \left\{ x(t) \right\} * \mathcal{F}_t \left\{ 1 - \left(\frac{x + \alpha_{xy} y}{K(t)}\right) \right\} \right) \\
+    &= \frac{r_x}{2 \pi} \left( X(\omega) * \mathcal{F}_t \left\{ 1 - \left(\frac{x + \alpha_{xy} y}{K(t)}\right) \right\} \right)
+\end{align}
+
+\noindent
+Using \cref{fourier_linearity},
+\begin{align}
+    i \omega X(\omega) &= \frac{r_x}{2 \pi} \left( X(\omega) * \left( \mathcal{F}_t \left\{ 1 \right\} -  \mathcal{F}_t \left\{ \left(x + \alpha_{xy} y\right) \left( \frac{1}{K(t)} \right) \right\} \right) \right)
+\end{align}
+
+\noindent
+Using \cref{fourier_multiplication} and \cref{fourier_linearity} again,
+\begin{align}
+    i \omega X(\omega) &= \frac{r_x}{2 \pi} \left( X(\omega) * \left( \mathcal{F}_t \left\{ 1 \right\} - \frac{1}{2 \pi} \left( \mathcal{F}_t \left\{ x + \alpha_{xy} y \right\} * \mathcal{F}_t \left\{ \frac{1}{K(t)} \right\} \right) \right) \right) \\
+    i \omega X(\omega) &= \frac{r_x}{2 \pi} \left( X(\omega) * \left( \mathcal{F}_t \left\{ 1 \right\} - \frac{1}{2 \pi}  \left( \left( \mathcal{F}_t \left\{ x \right\} + \alpha_{xy} \mathcal{F}_t \left\{ y \right\} \right) * \mathcal{F}_t \left\{ \frac{1}{K(t)} \right\} \right) \right) \right) \\
+    i \omega X(\omega) &= \frac{r_x}{2 \pi} \left( X(\omega) * \left( \mathcal{F}_t \left\{ 1 \right\} - \frac{1}{2 \pi}  \left( \left( X(\omega) + \alpha_{xy} Y(\omega) \right) * \mathcal{F}_t \left\{ \frac{1}{K(t)} \right\} \right) \right) \right)
+\end{align}
+
+\noindent
+Following the same procedure for the \cref{eq:competitive_lv_2},
+
+\subsubsection{Initial and Boundary Conditions}
+
+\subsubsection{Numerical Solution to Competitive Lotka-Volterra Equation}

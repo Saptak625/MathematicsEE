@@ -1,18 +1,18 @@
 \section{Introduction}
 \label{section:introduction} 
 The allure of differential equations and Fourier analysis for me lies in their ability to unravel the intricate patterns of nature and unlock the hidden harmonies within complex systems. 
-The ubiquitous presence of these fields across diverse scientific disciplines from physics and engineering to biology and economics help us understand the phenomena of celestial orbits and fluid flow to disease spread and stock market trends using one uniform language. 
+The ubiquitous presence of these fields across diverse scientific disciplines from physics and engineering to biology and economics help us understand the phenomena of celestial orbits and fluid flow to disease spread and stock market trends using one uniform language \citep{brunton2022data}. 
 
-Recently, I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates.
+Recently, I utilized differential equations to come up with the following accurate and applicable epidemic model for policymakers that accounts for disease incubation, quarantine, immunity wear-off, and mortality rates \citep{smith2004sir}.
 
-\begin{align}        
+\begin{align*}        
     \frac{dS}{dt} &= -\frac{\beta S I}{N} + \mu R \\
     \frac{dE}{dt} &= \frac{\beta S I}{N} - \phi E \\
     \frac{dI}{dt} &= \phi E - \zeta I - \gamma I - \alpha I \\
     \frac{dQ}{dt} &= \zeta I - \kappa Q - \epsilon Q \\
     \frac{dR}{dt} &= \gamma I + \kappa Q - \mu R \\
     \frac{dD}{dt} &= \alpha I + \epsilon Q
-\end{align}
+\end{align*}
 
 \noindent
 where:
@@ -29,17 +29,13 @@ where:
 \end{itemize}
 
 \noindent
-I was astonished by how elegantly this model was described in the language of differential equations.
-Hence, through differential equations, I discovered a simple language that unveils the secrets of the behavior of a system and its change over time. 
+I was astonished by how elegantly this model was described in the language of differential equations. Hence, through the use of differential equations, I was able to unveil the secrets of the behavior of a system and its change over time. 
 
 Fourier analysis, on the other hand, allowed me to deconstruct complex phenomena into fundamental sine and cosine components, revealing the underlying frequencies and patterns. 
-% TODO: Give an example of this...?
-In my research at my R\&D internship, I utilized Fourier analysis to analyze the frequency content of a complex, noisy, non-stationary vibration signal from an IMU and perform order analysis to study and understand the fundamental orders/frequencies of the system.
+During my research at my internship, I utilized Fourier analysis to analyze the frequency content of a complex, noisy, non-stationary vibration signal from an Inertial Measurement Unit (IMU) and perform order analysis to study and understand the fundamental orders and frequencies of the system.
 I was amazed how clear this coordinate transformation made the signal and how much information it revealed about the system's behavior.
-Thus, I became fascinated by their practical applications across scientific disciplines, enabling us to predict, simulate, and optimize the behavior of diverse systems. 
-Embracing the power of differential equations and Fourier analysis, I embarked on a lifelong journey to explore and understand the world's mysteries, driven by an insatiable curiosity to uncover the harmony and order that underlie our complex reality.
+I became fascinated by their practical applications across scientific disciplines, enabling us to predict, simulate, and optimize the behavior of diverse systems. 
+Thus, through this Extended Essay, I decided to investigate the question: \textbf{To what extent, can Fourier Analysis be used to solve Ordinary Differential Equations and Partial Differential Equations?}
 
-In this paper, I will explore the extent to which Fourier analysis can be utilized to solve ordinary differential equations (ODEs) and partial differential equations (PDEs).
-
-
-% TODO: Explain why you chose this topic. Why is this topic important and interesting to study?
+Throughout this paper, I utilize Fourier Analysis to simplify the order of ODE systems and reduce PDE systems into ODE systems in a wide array of fields ranging from physics to biology to finance.
+\textbf{Overall, while Fourier Analysis has its limitations and thus cannot be applied to all differential equation systems, in the areas where it proves effective, it significantly simplifies and solves otherwise challenging ordinary differential equations (ODEs) and partial differential equations (PDEs), thus making it a valuable analysis tool.}
